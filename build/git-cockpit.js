@@ -20,7 +20,7 @@ const _GIT_COCKPIT = {
 
 	let root = _GIT_COCKPIT.root;
 	let arg0 = typeof argv[0] === 'string' ? argv[0] : '';
-	if (arg0.startsWith('--') === false) {
+	if (arg0 !== '' && arg0.startsWith('--') === false) {
 		root = arg0;
 	}
 
@@ -161,8 +161,7 @@ const _GIT_COCKPIT = {
 
 	const _serve_file = function(url, res) {
 
-		let buffer = _fs.readFileSync(_PUBLIC + url);
-		// let buffer = _CACHE[url] || null;
+		let buffer = _CACHE[url] || null;
 		if (buffer !== null) {
 
 			res.writeHead(200, _get_headers(url, buffer));
@@ -188,6 +187,10 @@ const _GIT_COCKPIT = {
 	const server = _http.createServer((req, res) => {
 
 		let url = req.url;
+		if (url === '/') {
+			url = '/index.html';
+		}
+
 		if (url.startsWith('/api/')) {
 
 			_serve_api(url, res);

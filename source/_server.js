@@ -71,8 +71,7 @@
 
 	const _serve_file = function(url, res) {
 
-		let buffer = _fs.readFileSync(_PUBLIC + url);
-		// let buffer = _CACHE[url] || null;
+		let buffer = _CACHE[url] || null;
 		if (buffer !== null) {
 
 			res.writeHead(200, _get_headers(url, buffer));
@@ -98,6 +97,10 @@
 	const server = _http.createServer((req, res) => {
 
 		let url = req.url;
+		if (url === '/') {
+			url = '/index.html';
+		}
+
 		if (url.startsWith('/api/')) {
 
 			_serve_api(url, res);

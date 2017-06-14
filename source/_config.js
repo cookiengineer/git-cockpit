@@ -20,7 +20,7 @@ const _GIT_COCKPIT = {
 
 	let root = _GIT_COCKPIT.root;
 	let arg0 = typeof argv[0] === 'string' ? argv[0] : '';
-	if (arg0.startsWith('--') === false) {
+	if (arg0 !== '' && arg0.startsWith('--') === false) {
 		root = arg0;
 	}
 
