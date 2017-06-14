@@ -54,26 +54,34 @@ const _GIT_COCKPIT = {
 
 	_fs.readdir(root, (err, folders) => {
 
-		folders.forEach(folder => {
+		if (!err && folders instanceof Array) {
 
-			if (_fs.existsSync(root + '/' + folder + '/.git')) {
+			folders.forEach(folder => {
 
-				_GIT_COCKPIT.repos.push({
-					name: folder,
-					path: root + '/' + folder + '/.git'
-				});
+				if (_fs.existsSync(root + '/' + folder + '/.git')) {
 
-			}
+					_GIT_COCKPIT.repos.push({
+						name: folder,
+						path: root + '/' + folder + '/.git'
+					});
 
-			_fs.readdir(root + '/' + folder, (err, subfolders) => {
+				}
 
-				subfolders.forEach(subfolder => {
+				_fs.readdir(root + '/' + folder, (err, subfolders) => {
 
-					if (_fs.existsSync(root + '/' + folder + '/' + subfolder + '/.git')) {
+					if (!err && subfolders instanceof Array) {
 
-						_GIT_COCKPIT.repos.push({
-							name: folder + '/' + subfolder,
-							path: root + '/' + folder + '/' + subfolder + '/.git'
+						subfolders.forEach(subfolder => {
+
+							if (_fs.existsSync(root + '/' + folder + '/' + subfolder + '/.git')) {
+
+								_GIT_COCKPIT.repos.push({
+									name: folder + '/' + subfolder,
+									path: root + '/' + folder + '/' + subfolder + '/.git'
+								});
+
+							}
+
 						});
 
 					}
@@ -82,7 +90,11 @@ const _GIT_COCKPIT = {
 
 			});
 
-		});
+		} else {
+
+			console.error('Could not read folder "' + root + '" (maybe no read access?)');
+
+		}
 
 	});
 
@@ -276,8 +288,6 @@ const _GIT_COCKPIT = {
 
 		names.forEach(name => {
 
-			let refs = [];
-
 			_fs.readdirSync(path + '/refs/remotes/' + name)
 				// .filter(ref => ref !== 'HEAD')
 				.map(ref => [
@@ -381,30 +391,6 @@ const _GIT_COCKPIT = {
 						case 'CD':
 							state = 'copied-in-index';
 							break;
-
-						case 'M ':
-						case 'A ':
-						case 'R ':
-						case 'C ':
-							state = 'index-and-work-tree-matches';
-							break;
-
-						case ' M':
-						case 'MM':
-						case 'AM':
-						case 'RM':
-						case 'CM':
-							state = 'work-tree-changed-since-index';
-							break;
-
-						case ' D':
-						case 'MD':
-						case 'AD':
-						case 'RD':
-						case 'CD':
-							state = 'deleted-in-work-tree';
-							break;
-
 
 						case 'DD':
 						case 'AU':

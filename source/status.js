@@ -23,8 +23,6 @@
 
 		names.forEach(name => {
 
-			let refs = [];
-
 			_fs.readdirSync(path + '/refs/remotes/' + name)
 				// .filter(ref => ref !== 'HEAD')
 				.map(ref => [
@@ -128,30 +126,6 @@
 						case 'CD':
 							state = 'copied-in-index';
 							break;
-
-						case 'M ':
-						case 'A ':
-						case 'R ':
-						case 'C ':
-							state = 'index-and-work-tree-matches';
-							break;
-
-						case ' M':
-						case 'MM':
-						case 'AM':
-						case 'RM':
-						case 'CM':
-							state = 'work-tree-changed-since-index';
-							break;
-
-						case ' D':
-						case 'MD':
-						case 'AD':
-						case 'RD':
-						case 'CD':
-							state = 'deleted-in-work-tree';
-							break;
-
 
 						case 'DD':
 						case 'AU':
