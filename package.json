@@ -1,0 +1,23 @@
+{
+	"name": "git-cockpit",
+	"version": "0.0.1",
+	"description": "Quick overview of local git repositories.",
+	"main": "./build/git-cockpit.js",
+	"bin": {
+		"git-cockpit": "./build/git-cockpit.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/cookiengineer/git-cockpit.git"
+	},
+	"keywords": [
+		"git",
+		"diff"
+	],
+	"author": "Cookie Engineer",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/cookiengineer/git-cockpit/issues"
+	},
+	"homepage": "https://github.com/cookiengineer/git-cockpit#readme"
+}

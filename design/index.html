@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>git cockpit</title>
+		<link rel="stylesheet" href="/index.css">
+	</head>
+	<body>
+		<header>
+			<h3>git cockpit (<span id="repos-count">0 repos</span>)</h3>
+			<div>
+				<button onclick="filter_repos([]);">All</button>
+				<button onclick="filter_repos([ 'unsynced-changes', 'unsynced-remotes' ]);">Unsynced</button>
+				<button onclick="reload_repos();">Reload</button>
+			</div>
+		</header>
+		<main>
+		<noscript>
+			Please activate JavaScript for this webpage
+			to function. It is necessary to retrieve the
+			data from the (local) server.
+		</noscript>
+		<table id="repositories">
+			<th>Repository</th>
+			<th>Changes</th>
+			<th>Remotes</th>
+		</table>
+		</main>
+		<script src="/index.js"></script>
+	</body>
+</html>
+

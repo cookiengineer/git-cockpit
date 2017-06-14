@@ -1,0 +1,124 @@
+
+body {
+	margin: 0px;
+	padding: 0px;
+	color: #ffffff;
+	background: #383c4a;
+	font-size: 16px;
+	font-family: Cantarell, serif;
+}
+
+header {
+	position: fixed;
+	height: 64px;
+	line-height: 64px;
+	top: 0px;
+	right: 0px;
+	bottom: auto;
+	left: 0px;
+	text-align: center;
+	background: #383c4a;
+}
+
+header h3 {
+	display: inline-block;
+	margin: 0px;
+	padding: 0px;
+	font-size: 24px;
+	font-weight: normal;
+}
+
+header > div {
+	display: block;
+	position: absolute;
+	margin: 0px;
+	padding: 16px 16px 0px 0px;
+	line-height: 32px;
+	width: auto;
+	height: auto;
+	top: 0px;
+	right: 0px;
+	bottom: auto;
+	left: auto;
+	text-align: right;
+}
+
+main {
+	padding: 96px 0px 0px 0px;
+}
+
+a {
+	color: #32afe5;
+	font-weight: normal;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+table {
+	width: 100%;
+	margin: 1em auto 3em auto;
+}
+
+table tr:nth-child(2n) {
+	background: rgba(255, 255, 255, 0.1);
+}
+
+table tr.no-changes {
+	/* background: #39ea49; */
+}
+
+table tr.unsynced-changes,
+table tr.unsynced-remotes {
+	background: #fac536;
+}
+
+
+table tr.hidden {
+	display: none;
+}
+
+table th,
+table td {
+	padding: 4px;
+	border: 0px solid transparent;
+}
+
+table th {
+	text-align: left;
+}
+
+table td:nth-of-type(1) {
+	text-align: left;
+}
+
+table td:nth-of-type(1) span {
+	display: block;
+}
+
+table td:nth-of-type(2) {
+	text-align: right;
+}
+
+table td:nth-of-type(2) span {
+	display: block;
+}
+
+table td.with-changelog {
+	background: #1f2726;
+	padding: 0px;
+}
+
+div.changelog {
+	font-family: monospace;
+	background: #1f2726;
+	padding: 4px;
+}
+
+div.changelog span[data-xy*="A"] {
+	color: green;
+}
+
+div.changelog span[data-xy*="M"] {
+	color: red;
+}
+
