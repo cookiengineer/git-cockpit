@@ -1,6 +1,6 @@
 {
 	"name": "git-cockpit",
-	"version": "0.0.3",
+	"version": "0.0.4",
 	"description": "Quick overview of local git repositories.",
 	"main": "./build/git-cockpit.js",
 	"bin": {

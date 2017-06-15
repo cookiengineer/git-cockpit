@@ -24,11 +24,29 @@
 		names.forEach(name => {
 
 			_fs.readdirSync(path + '/refs/remotes/' + name)
-				// .filter(ref => ref !== 'HEAD')
-				.map(ref => [
-					ref,
-					_fs.readFileSync(path + '/refs/remotes/' + name + '/' + ref).toString('utf8').trim()
-				])
+				.reduce((refs, ref) => {
+
+					let ref_path     = path + '/refs/remotes/' + name + '/' + ref;
+					let is_directory = _fs.lstatSync(ref_path).isDirectory();
+					if (is_directory === false) {
+
+						refs.push([
+							ref,
+							_fs.readFileSync(ref_path).toString('utf8').trim()
+						]);
+
+					} else {
+
+						refs.push.apply(refs, _fs.readdirSync(ref_path).map(ref => [
+							ref,
+							_fs.readFileSync(ref_path + '/' + ref).toString('utf8').trim()
+						]));
+
+					}
+
+					return refs;
+
+				}, [])
 				.forEach(ref => {
 
 					remotes.push({
