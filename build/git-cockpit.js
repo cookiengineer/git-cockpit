@@ -287,13 +287,26 @@ const _GIT_COCKPIT = {
 		}
 
 		names.forEach(name => {
-
 			_fs.readdirSync(path + '/refs/remotes/' + name)
 				// .filter(ref => ref !== 'HEAD')
-				.map(ref => [
-					ref,
-					_fs.readFileSync(path + '/refs/remotes/' + name + '/' + ref).toString('utf8').trim()
-				])
+				.reduce((refs, ref) => {
+					let refPath = path + '/refs/remotes/' + name + '/' + ref;
+					let isDirectory = _fs.lstatSync(refPath).isDirectory();
+					if (!isDirectory) {
+						refs.push([
+							ref,
+							_fs.readFileSync(refPath).toString('utf8').trim()
+						]);
+					} else {
+						let subdirRefs = _fs.readdirSync(refPath)
+							.map(ref => [
+								ref,
+								_fs.readFileSync(refPath + '/' + ref).toString('utf8').trim()
+							]);
+						refs.push.apply(refs, subdirRefs);
+					}
+					return refs;
+				}, [])
 				.forEach(ref => {
 
 					remotes.push({

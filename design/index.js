@@ -212,7 +212,7 @@ if (typeof Array.prototype.unique !== 'function') {
 
 		});
 
-	}
+	};
 
 
 
