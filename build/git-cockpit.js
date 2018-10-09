@@ -289,7 +289,6 @@ const _GIT_COCKPIT = {
 		names.forEach(name => {
 
 			_fs.readdirSync(path + '/refs/remotes/' + name)
-				// .filter(ref => ref !== 'HEAD')
 				.reduce((refs, ref) => {
 
 					let ref_path     = path + '/refs/remotes/' + name + '/' + ref;
@@ -362,7 +361,7 @@ const _GIT_COCKPIT = {
 			cwd: cwd
 		});
 
-		let stdout = data.stdout.toString('utf8');
+		let stdout = (data.stdout || '').toString('utf8');
 		if (stdout.length > 0) {
 
 			stdout.split('\n').forEach(line => {

@@ -96,7 +96,7 @@
 			cwd: cwd
 		});
 
-		let stdout = data.stdout.toString('utf8');
+		let stdout = (data.stdout || '').toString('utf8');
 		if (stdout.length > 0) {
 
 			stdout.split('\n').forEach(line => {
